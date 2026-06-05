@@ -20,11 +20,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pywebview pyinstaller pythonnet
+          pip install pywebview pyinstaller
 
       - name: Build .exe
         run: |
-          pyinstaller NoteAlarm.spec --clean --noconfirm
+          pyinstaller app.py `
+            --name NoteAlarm `
+            --onefile `
+            --windowed `
+            --noconfirm `
+            --hidden-import webview.platforms.winforms
 
       - name: Upload NoteAlarm.exe
         uses: actions/upload-artifact@v4
